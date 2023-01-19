@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import Input from "./components/Input";
+// import Input from "./components/Input";
 import Label from "./components/Label";
-import CheckboxInput from "./components/CheckboxInput";
+// import CheckboxInput from "./components/CheckboxInput";
 import { ErrorParagraph, Title1 } from "./styles/typography";
 import LabelParagraph from "./components/LabelParagraph";
 import InputGroup from "./components/InputGroup";
@@ -11,34 +11,74 @@ import CheckboxesContainer from "./components/CheckboxesContainer";
 import DaysContainer from "./components/DaysContainer";
 import Form from "./components/Form";
 import ThemeButton from "./components/ThemeButton";
+import { FieldValues, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { simulationFormSchema } from "./validators/simulationFormSchema";
 
 function App() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(simulationFormSchema),
+  });
+
+  const calculatePayment = (data: FieldValues) => {
+    console.log("hi");
+
+    console.log(data);
+  };
+
   return (
     <div className="App">
       <div className="container">
         <div className="formContainer">
           <Title1>Simule sua antecipação</Title1>
 
-          <Form>
+          <Form onSubmit={handleSubmit(calculatePayment)}>
             <div className="formFieldsContainer">
               <InputGroup>
-                <Label htmlFor="salePrice">Informe o valor da venda *</Label>
-                <Input id="salePrice" type="number" placeholder="R$ 1.234,56" />
-                <ErrorParagraph>teste teste</ErrorParagraph>
+                <Label htmlFor="amount">Informe o valor da venda *</Label>
+                <input
+                  id="amount"
+                  type="number"
+                  step="any"
+                  placeholder="R$ 1.234,56"
+                  {...register("amount")}
+                />
+                <ErrorParagraph>
+                  <>{errors.amount?.message}</>
+                </ErrorParagraph>
               </InputGroup>
 
               <InputGroup>
                 <Label htmlFor="installments">
                   Informe o número de parcelas *
                 </Label>
-                <Input id="installments" type="number" placeholder="1" />
-                <ErrorParagraph>teste teste</ErrorParagraph>
+                <input
+                  id="installments"
+                  type="number"
+                  placeholder="1"
+                  {...register("installments")}
+                />
+                <ErrorParagraph>
+                  <>{errors.installments?.message}</>
+                </ErrorParagraph>
               </InputGroup>
 
               <InputGroup>
                 <Label htmlFor="mdr">Informe o percentual de MDR *</Label>
-                <Input id="mdr" type="number" placeholder="3.99" />
-                <ErrorParagraph>teste teste</ErrorParagraph>
+                <input
+                  id="mdr"
+                  type="number"
+                  step="any"
+                  placeholder="3.99"
+                  {...register("mdr")}
+                />
+                <ErrorParagraph>
+                  <>{errors.mdr?.message}</>
+                </ErrorParagraph>
               </InputGroup>
 
               <DaysContainer>
@@ -48,51 +88,51 @@ function App() {
 
                 <CheckboxesContainer>
                   <CheckboxGroup>
-                    <CheckboxInput
+                    <input
                       type="checkbox"
                       id="oneDay"
-                      name="days"
                       value={1}
+                      {...register("days")}
                     />
                     <Label htmlFor="oneDay">1 dia</Label>
                   </CheckboxGroup>
 
                   <CheckboxGroup>
-                    <CheckboxInput
+                    <input
                       type="checkbox"
                       id="fifteenDays"
-                      name="days"
                       value={15}
+                      {...register("days")}
                     />
                     <Label htmlFor="fifteenDays">15 dias</Label>
                   </CheckboxGroup>
 
                   <CheckboxGroup>
-                    <CheckboxInput
+                    <input
                       type="checkbox"
                       id="thirtyDays"
-                      name="days"
                       value={30}
+                      {...register("days")}
                     />
                     <Label htmlFor="thirtyDays">30 dias</Label>
                   </CheckboxGroup>
 
                   <CheckboxGroup>
-                    <CheckboxInput
+                    <input
                       type="checkbox"
                       id="sixtyDays"
-                      name="days"
                       value={60}
+                      {...register("days")}
                     />
                     <Label htmlFor="sixtyDays">60 dias</Label>
                   </CheckboxGroup>
 
                   <CheckboxGroup>
-                    <CheckboxInput
+                    <input
                       type="checkbox"
                       id="ninetyDays"
-                      name="days"
                       value={90}
+                      {...register("days")}
                     />
                     <Label htmlFor="ninetyDays">90 dias</Label>
                   </CheckboxGroup>
