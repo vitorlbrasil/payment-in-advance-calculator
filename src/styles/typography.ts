@@ -16,9 +16,9 @@ export const Title2 = styled.h2`
 
 export const Span = styled.span`
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-style: italic;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 `;
 
 export const ErrorParagraph = styled.p`

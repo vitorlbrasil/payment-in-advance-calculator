@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import "./App.css";
 // import Input from "./components/Input";
 import Label from "./components/Label";
@@ -18,10 +18,23 @@ import api from "./services/api";
 import { IAnticipatedAmounts } from "./interfaces/IAnticipatedAmounts";
 import ContainerHeader from "./components/ContainerHeader";
 import AmountList from "./components/AmountList";
+import { BarLoader } from "react-spinners";
+import { toast, ToastContainer } from "react-toastify";
+import { AxiosError } from "axios";
+import "react-toastify/dist/ReactToastify.css";
+
+// const override: CSSProperties = {
+//   display: "block",
+//   margin: "0 auto",
+//   borderColor: "red",
+//   zIndex: 3,
+// };
 
 function App() {
   const [anticipatedAmounts, setAnticipatedAmounts] =
     useState<IAnticipatedAmounts | null>(null);
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   const {
     register,
@@ -35,11 +48,22 @@ function App() {
     try {
       const response = await api.post("/", data);
       setAnticipatedAmounts(response.data);
-    } catch (error) {}
+    } catch (error: any) {
+      toast.error(error.response.data);
+    }
   };
 
   return (
     <div className="App">
+      <ToastContainer />
+      {/* <BarLoader
+        color="aqua"
+        loading={loading}
+        cssOverride={override}
+        // size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      /> */}
       <div className="container">
         <div className="formContainer">
           <Title1>Simule sua antecipação</Title1>
