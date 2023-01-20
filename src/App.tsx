@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 // import Input from "./components/Input";
 import Label from "./components/Label";
 // import CheckboxInput from "./components/CheckboxInput";
-import { ErrorParagraph, Title1 } from "./styles/typography";
+import { ErrorParagraph, Title1, Title2 } from "./styles/typography";
 import LabelParagraph from "./components/LabelParagraph";
 import InputGroup from "./components/InputGroup";
 import CheckboxGroup from "./components/CheckboxGroup";
@@ -14,8 +14,15 @@ import ThemeButton from "./components/ThemeButton";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { simulationFormSchema } from "./validators/simulationFormSchema";
+import api from "./services/api";
+import { IAnticipatedAmounts } from "./interfaces/IAnticipatedAmounts";
+import ContainerHeader from "./components/ContainerHeader";
+import AmountList from "./components/AmountList";
 
 function App() {
+  const [anticipatedAmounts, setAnticipatedAmounts] =
+    useState<IAnticipatedAmounts | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -24,10 +31,11 @@ function App() {
     resolver: yupResolver(simulationFormSchema),
   });
 
-  const calculatePayment = (data: FieldValues) => {
-    console.log("hi");
-
-    console.log(data);
+  const calculatePayment = async (data: FieldValues) => {
+    try {
+      const response = await api.post("/", data);
+      setAnticipatedAmounts(response.data);
+    } catch (error) {}
   };
 
   return (
@@ -143,6 +151,13 @@ function App() {
             <ThemeButton type="submit">Calcular</ThemeButton>
           </Form>
         </div>
+
+        {anticipatedAmounts && (
+          <div className="anticipatedAmountsContainer">
+            <Title2>Você receberá:</Title2>
+            <AmountList anticipatedAmounts={anticipatedAmounts} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -34,3 +34,15 @@
   max-width: 25rem;
   padding: 1rem 0.75rem;
 }
+
+.anticipatedAmountsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+  max-width: 25rem;
+  padding: 1rem 0.75rem;
+
+  background-color: var(--grey-0);
+}
