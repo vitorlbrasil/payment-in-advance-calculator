@@ -1,38 +1,75 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--tertiary-color);
+}
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+  width: calc(100% - 1.5rem);
+  max-width: 21.875rem;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width: 650px) {
+  .container {
+    flex-direction: row;
+    width: fit-content;
+    height: 21.875rem;
+    max-width: initial;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+.container:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+
+  width: 100%;
+  max-width: 21.875rem;
+  padding: 1rem 0.75rem;
+}
+
+@media (min-width: 650px) {
+  .formContainer {
+    min-width: 21.875rem;
+  }
+}
+
+.anticipatedAmountsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+  max-width: 21.875rem;
+  padding: 1rem 0.75rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+
+  background-color: var(--grey-0);
+}
+
+@media (min-width: 650px) {
+  .anticipatedAmountsContainer {
+    min-width: 15.625rem;
+    height: 100%;
+    justify-content: center;
+    border-radius: 0 0.5rem 0.5rem 0;
   }
 }
