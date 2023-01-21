@@ -7,6 +7,8 @@ export const StyledDiv = styled.div`
 
   width: 100%;
 
+  position: relative;
+
   > input {
     width: 100%;
     padding: 0.25rem;

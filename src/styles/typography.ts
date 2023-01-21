@@ -25,4 +25,7 @@ export const ErrorParagraph = styled.p`
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--red);
+
+  position: absolute;
+  bottom: -0.75rem;
 `;
