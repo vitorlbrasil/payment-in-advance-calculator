@@ -1,16 +1,27 @@
 import * as yup from "yup";
 
-export const simulationFormSchema = yup.object().shape({
+export const simulationFormSchema = yup.object({
   amount: yup
     .number()
-    .transform((value) => value * 100)
+    .transform((cv: unknown, ov: unknown) =>
+      typeof ov === "string" && ov.trim() === "" ? undefined : cv
+    )
+    .positive("O valor deve ser positivo!")
     .required("O valor da venda é obrigatório!"),
   installments: yup
     .number()
-    .integer("Deve ser um número inteiro")
-    .max(12, "Máximo de 12 parcelas")
+    .transform((cv: unknown, ov: unknown) =>
+      typeof ov === "string" && ov.trim() === "" ? undefined : cv
+    )
+    .integer("Deve ser um número inteiro!")
+    .max(12, "Máximo de 12 parcelas!")
     .required("O número de parcelas é obrigatório!"),
-  mdr: yup.number().required("O percentual de MDR é obrigatório!"),
+  mdr: yup
+    .number()
+    .transform((cv: unknown, ov: unknown) =>
+      typeof ov === "string" && ov.trim() === "" ? undefined : cv
+    )
+    .required("O percentual de MDR é obrigatório!"),
   days: yup
     .array()
     .of(yup.number().integer())
