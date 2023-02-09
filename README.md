@@ -2,9 +2,13 @@
 
 Esta aplicação mostra ao cliente quanto custa antecipar uma transação de cartão de crédito ou débito, retornando os valores que receberá caso opte pela antecipação do pagamento.
 
-## Scripts Disponíveis:
+## Como rodar o projeto:
 
 Neste projeto, você pode rodar:
+
+### `yarn`
+
+Instala todas as dependências necessárias ao projeto.
 
 ### `yarn start`
 
@@ -19,4 +23,4 @@ Você também verá quaisquer erros de lint no console.
 Cria o app para produção na pasta `build`.\
 Ele empacota corretamente o React no modo de produção e otimiza a compilação para obter o melhor desempenho.
 
-A compilação é minificada e os nomes dos arquivos incluem os hashes.\
+A compilação é minificada e os nomes dos arquivos incluem os hashes.
